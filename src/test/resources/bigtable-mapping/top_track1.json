@@ -1,0 +1,120 @@
+{
+  "keys": [
+    { "name": "period_marker" },
+    { "name": "period" },
+    { "name": "country_subdivision_code" },
+    { "name": "sub_account_code" },
+    { "name": "product_genre_code" },
+    { "name": "label_family_id" },
+    { "name": "rank", "pad": 5}
+  ],
+  "columns": [
+    {
+      "avro-field-name": "master_track_id",
+      "column-family": "track",
+      "column-qualifier-static": true,
+      "column-qualifier": "id"
+    },
+    {
+      "avro-field-name": "audio_stream_units",
+      "column-family": "units",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "mt",
+      "column-qualifier": "as"
+
+    },
+    {
+      "avro-field-name": "video_stream_units",
+      "column-family": "units",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "mt",
+      "column-qualifier": "vs"
+
+    },
+    {
+      "avro-field-name": "digital_track_units",
+      "column-family": "units",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "mt",
+      "column-qualifier": "dt"
+
+    },
+
+    {
+      "avro-field-name": "audio_stream_euro",
+      "column-family": "euro",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "mt",
+      "column-qualifier": "as"
+
+    },
+    {
+      "avro-field-name": "video_stream_euro",
+      "column-family": "euro",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "mt",
+      "column-qualifier": "vs"
+
+    },
+
+    {
+      "avro-field-name": "digital_track_euro",
+      "column-family": "euro",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "mt",
+      "column-qualifier": "dt"
+
+    },
+    {
+      "avro-field-name": "units",
+      "column-family": "units",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "pd",
+      "column-qualifier": "tp"
+
+    },
+    {
+      "avro-field-name": "lp_units",
+      "column-family": "units",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "pd",
+      "column-qualifier": "lp"
+
+    },
+    {
+      "avro-field-name": "rtd_units",
+      "column-family": "units",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "pd",
+      "column-qualifier": "rtd"
+
+    },
+    {
+      "avro-field-name": "euro",
+      "column-family": "euro",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "pd",
+      "column-qualifier": "tp"
+
+    },
+    {
+      "avro-field-name": "lp_euro",
+      "column-family": "euro",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "pd",
+      "column-qualifier": "lp"
+
+    },
+    {
+      "avro-field-name": "rtd_euro",
+      "column-family": "euro",
+      "column-qualifier-static": true,
+      "column-qualifier-prefix": "pd",
+      "column-qualifier": "rtd"
+
+    }
+
+  ]
+
+}
+

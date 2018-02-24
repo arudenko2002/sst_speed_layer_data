@@ -1,0 +1,7 @@
+{
+
+    "sqlExpField" : {
+        "Source-Staging":  "cast(PROJECT_ID as string)  $INCLAUSE ($PARAMS)",
+        "Source-Metadata":  "cast($ALIAS_PRODUCT.PROJECT_ID as string)  $INCLAUSE ($PARAMS)"
+    }
+}

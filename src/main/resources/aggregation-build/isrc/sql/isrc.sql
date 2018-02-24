@@ -1,0 +1,47 @@
+select
+${PERIOD_MARKER} as period_marker,
+cast(${PERIOD} as string) as period,
+${TERRITORY_MARKER} as territory_marker,
+cast(${TERRITORY} as string) as territory,
+${TERRITORY_SUBDIVISION} as territory_subdivision,
+cast(${PARTNER} as string) as partner,
+${LABEL_MARKER} as label_marker,
+cast(${LABEL} as string) as label,
+${USAGE_TYPE_TIER} as usage_type_tier,
+cast(master_track_id as string) as master_track_id,
+isrc,
+sum(units) as units,
+sum(digital_track_units) as digital_track_units,
+sum(video_stream_units) as video_stream_units,
+sum(audio_stream_units) as audio_stream_units,
+sum(euro) as euro,
+sum(digital_track_euro) as digital_track_euro,
+sum(video_stream_euro) as video_stream_euro,
+sum(audio_stream_euro) as audio_stream_euro,
+sum(track_adjusted_units) as track_adjusted_units,
+sum(audio_stream_track_adjusted_units) as audio_stream_track_adjusted_units,
+sum(video_stream_track_adjusted_units) as video_stream_track_adjusted_units,
+sum(digital_track_track_adjusted_units) as digital_track_track_adjusted_units,
+${SHARD_NUMBER} as shard_number,
+timestamp('${LOAD_DATETIME}', "America/Los_Angeles") as load_datetime
+from `$SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS` $ALIAS_TRANSACTION
+inner join (select * from `$SST_SOURCE_DATASET.$TABLE_NAME_PRODUCT` where master_track_id is not null) $ALIAS_PRODUCT on $ALIAS_TRANSACTION.product_id = $ALIAS_PRODUCT.product_id
+${ADDITIONAL_JOIN}
+where $ALIAS_TRANSACTION._partitiontime >= timestamp('${PARTITION_START_DATE}') and
+$ALIAS_TRANSACTION._partitiontime <= timestamp('${PARTITION_END_DATE}')
+--${WHERE_PARTITION_CLAUSE}
+${CHANGESET_CLAUSE}
+${INCREMENTAL_WHERE_CALUSE}
+${ADDITIONAL_WHERE_CALUSE}
+group by
+master_track_id,
+isrc,
+territory_marker,
+territory,
+partner,
+label_marker,
+label,
+period_marker,
+period,
+territory_subdivision,
+usage_type_tier

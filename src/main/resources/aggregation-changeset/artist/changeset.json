@@ -1,0 +1,8 @@
+{
+
+    "sqlExpField" : {
+        "Source-Staging":  "cast(master_artist_id as string)  $INCLAUSE ($PARAMS)",
+        "Source-Metadata":  "cast($ALIAS_PRODUCT.master_artist_id as string)  $INCLAUSE ($PARAMS)"
+    }
+
+}

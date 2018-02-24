@@ -1,0 +1,276 @@
+#sst configuration file
+
+#RTD start and end date
+rtdStartDate: 1999-01-01
+rtdEndDate: 9999-12-31
+
+#flag to turn on weekly for prior periods
+weekForPriorPeriod: True
+
+#config for building weekly or daily aggregation.
+#detail module, daily agg is build only for last 5 months, for prior periods weekly aggregation is build
+weekOrDayShard:
+  modules: ["ARTIST", "PROJECT", "TRACK", "ISRC", "ALBUM"]
+  weekStartDate: 1999-01-01
+  weekEndDate:  2017-08-24
+  dayStartDate: 2017-08-25
+  dayEndDate:  9999-12-31
+
+
+
+#flag to turn on/enable cross module build, example top tracks from tracks, top projects from project, top artist from artist
+crossModuleBuild: False
+
+#flag to enable using dynamic decision engine. if turned off, impacted report dates are found from transaction table , if turned on impacted report dates are read from period process stack table
+decisionEngineEnabled: True
+
+#sql queries
+queries:
+
+  #look up queries
+  lookup:
+    COUNTRY-REGION : select distinct sst_country_code, region_id from `$SST_SOURCE_DATASET.$TABLE_NAME_REGION`  where region_id <> 38
+    #queries for finding periods based on elt start and end date range, used in historical loading
+    DAY-RANGE: >
+            select day_id as period, d.day as start_date, d.day as end_date, DATE_SUB(d.day, INTERVAL 1 DAY) as lt_start_date, DATE_SUB(d.day, INTERVAL 1 DAY) as lt_end_date from
+            `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` d where day_id >= ${START_DATE} and
+            day_id <= ${END_DATE} order by day_id
+    WEEK-RANGE: >
+            select period, start_date, end_date, lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date
+            from (
+            select global_week as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 WEEK) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 WEEK) lt_end_date from `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` d where
+            global_week >= (select global_week from `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` where day_id = ${START_DATE})
+            and global_week <= (select global_week from `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` where day_id = ${END_DATE} ) group by global_week order by global_week ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    QUARTER-RANGE: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date
+            from (
+            select quarter as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 QUARTER) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 QUARTER) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            quarter >= (select quarter from $SST_SOURCE_DATASET.$TABLE_NAME_DAY where day_id = ${START_DATE})
+            and quarter <= (select quarter from $SST_SOURCE_DATASET.$TABLE_NAME_DAY where day_id = ${END_DATE} ) group by quarter order by quarter ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    MONTH-RANGE: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date from (
+            select month as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 MONTH) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 MONTH) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            month >= (select month from $SST_SOURCE_DATASET.$TABLE_NAME_DAY where day_id = ${START_DATE})
+            and month <= (select month from $SST_SOURCE_DATASET.$TABLE_NAME_DAY where day_id = ${END_DATE}) group by month order by month ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    YEAR-RANGE: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date from (
+            select year as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 YEAR) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 YEAR) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            year >= (select year from $SST_SOURCE_DATASET.$TABLE_NAME_DAY  d where day_id = ${START_DATE})
+            and year <= (select year from $SST_SOURCE_DATASET.$TABLE_NAME_DAY where day_id = ${END_DATE}) group by year order by year ),
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS )
+
+    #queries for finding periods based on distinct report dates impacted, used in incremental loading(non decision engine based)
+    DAY-DISTINCT: >
+            select day_id as period, d.day as start_date, d.day as end_date, DATE_SUB(d.day, INTERVAL 1 DAY) as lt_start_date, DATE_SUB(d.day, INTERVAL 1 DAY) as lt_end_date from
+            `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` d where d.day in (SELECT DISTINCT partner_report_date
+            FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS
+            WHERE cast(load_datetime as date) BETWEEN PARSE_DATE("%Y%m%d", "${START_DATE}") AND PARSE_DATE("%Y%m%d", "${END_DATE}") ) order by day_id
+    WEEK-DISTINCT: >
+            select period, start_date, end_date, lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date
+            from (
+            select global_week as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 WEEK) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 WEEK) lt_end_date from `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` d where
+            global_week in (select distinct global_week from `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` f where f.day in (SELECT DISTINCT partner_report_date
+            FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS WHERE cast(load_datetime as date) BETWEEN PARSE_DATE("%Y%m%d", "${START_DATE}") AND PARSE_DATE("%Y%m%d", "${END_DATE}"))) group by global_week order by global_week ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    QUARTER-DISTINCT: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date
+            from (
+            select quarter as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 QUARTER) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 QUARTER) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            quarter in (select distinct quarter from $SST_SOURCE_DATASET.$TABLE_NAME_DAY f where f.day in (SELECT DISTINCT partner_report_date
+            FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS
+            WHERE cast(load_datetime as date) BETWEEN PARSE_DATE("%Y%m%d", "${START_DATE}") AND PARSE_DATE("%Y%m%d", "${END_DATE}"))) group by quarter order by quarter ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    MONTH-DISTINCT: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date from (
+            select month as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 MONTH) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 MONTH) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            month in (select distinct month from $SST_SOURCE_DATASET.$TABLE_NAME_DAY f where f.day in (SELECT DISTINCT partner_report_date
+            FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS
+            WHERE cast(load_datetime as date) BETWEEN PARSE_DATE("%Y%m%d", "${START_DATE}") AND PARSE_DATE("%Y%m%d", "${END_DATE}"))) group by month order by month ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    YEAR-DISTINCT: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date from (
+            select year as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 YEAR) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 YEAR) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            year in (select distinct year from $SST_SOURCE_DATASET.$TABLE_NAME_DAY f where f.day in (SELECT DISTINCT partner_report_date
+            FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS
+            WHERE cast(load_datetime as date) BETWEEN PARSE_DATE("%Y%m%d", "${START_DATE}") AND PARSE_DATE("%Y%m%d", "${END_DATE}"))) group by year order by year ),
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS )
+
+    #queries for finding periods based on distinct report dates impacted, used in incremental loading(decision engine based and currently in use for incremental)
+    DAY-DISTINCT-DYNAMICENGINE: >
+            select day_id as period, d.day as start_date, d.day as end_date, DATE_SUB(d.day, INTERVAL 1 DAY) as lt_start_date, DATE_SUB(d.day, INTERVAL 1 DAY) as lt_end_date from
+            `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` d where d.day in (SELECT DISTINCT date
+            FROM $SST_SOURCE_DATASET.$TABLE_PERIOD_STACK WHERE status = 'scheduled' ) order by day_id
+    WEEK-DISTINCT-DYNAMICENGINE: >
+            select period, start_date, end_date, lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date
+            from (
+            select global_week as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 WEEK) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 WEEK) lt_end_date from `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` d where
+            global_week in (select distinct global_week from `$SST_SOURCE_DATASET.$TABLE_NAME_DAY` f where f.day in (SELECT DISTINCT date
+            FROM $SST_SOURCE_DATASET.$TABLE_PERIOD_STACK WHERE status = 'scheduled')) group by global_week order by global_week ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    QUARTER-DISTINCT-DYNAMICENGINE: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date
+            from (
+            select quarter as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 QUARTER) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 QUARTER) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            quarter in (select distinct quarter from $SST_SOURCE_DATASET.$TABLE_NAME_DAY f where f.day in (SELECT DISTINCT date
+            FROM $SST_SOURCE_DATASET.$TABLE_PERIOD_STACK WHERE status = 'scheduled')) group by quarter order by quarter ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    MONTH-DISTINCT-DYNAMICENGINE: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date from (
+            select month as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 MONTH) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 MONTH) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            month in (select distinct month from $SST_SOURCE_DATASET.$TABLE_NAME_DAY f where f.day in (SELECT DISTINCT date
+            FROM $SST_SOURCE_DATASET.$TABLE_PERIOD_STACK WHERE status = 'scheduled')) group by month order by month ) s1,
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS ) as s2
+    YEAR-DISTINCT-DYNAMICENGINE: >
+            select period, start_date, end_date,  lt_start_date,
+            if(max_trans_date >= end_date, lt_end_date, if(DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY) > lt_end_date, lt_end_date,
+            DATE_ADD(lt_start_date, INTERVAL DATE_DIFF(max_trans_date,start_date, DAY) DAY))) as lt_end_date from (
+            select year as period, min(d.day) start_date, max(d.day) end_date, DATE_SUB(min(d.day), INTERVAL 1 YEAR) lt_start_date,
+            DATE_SUB(max(d.day), INTERVAL 1 YEAR) lt_end_date from $SST_SOURCE_DATASET.$TABLE_NAME_DAY d where
+            year in (select distinct year from $SST_SOURCE_DATASET.$TABLE_NAME_DAY f where f.day in (SELECT DISTINCT date
+            FROM $SST_SOURCE_DATASET.$TABLE_PERIOD_STACK WHERE status = 'scheduled')) group by year order by year ),
+            (SELECT DATE(MAX(_PARTITIONTIME) ) as max_trans_date FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS )
+    REPORT-DATES: >
+            SELECT FORMAT_DATE("%Y%m%d", min(partner_report_date)) report_start_date, FORMAT_DATE("%Y%m%d", max(partner_report_date)) report_end_date
+            FROM $SST_SOURCE_DATASET.$TABLE_NAME_TRANSACTIONS
+            WHERE cast(load_datetime as date) BETWEEN PARSE_DATE("%Y%m%d", "${START_DATE}") AND PARSE_DATE("%Y%m%d", "${END_DATE}")
+
+   #changeset queries
+  changeset-count:
+    ARTIST_DAILY: select count(*) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_ARTIST_DAILY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    PROJECT_DAILY: select count(*) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_PROJECT_DAILY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    TRACK_DAILY: select count(*) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_TRACK_DAILY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+
+    ARTIST_WEEKLY: select count(*) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_ARTIST_WEEKLY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    PROJECT_WEEKLY: select count(*) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_PROJECT_WEEKLY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    TRACK_WEEKLY: select count(*) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_TRACK_WEEKLY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    REGION:
+
+  #changeset queries
+  changeset:
+
+    ARTIST_DAILY: select distinct(master_artist_id) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_ARTIST_DAILY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    PROJECT_DAILY: select distinct(project_id) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_PROJECT_DAILY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    TRACK_DAILY: select distinct(master_track_id) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_TRACK_DAILY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+
+    ARTIST_WEEKLY: select distinct(master_artist_id)  from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_ARTIST_WEEKLY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    PROJECT_WEEKLY: select distinct(project_id) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_PROJECT_WEEKLY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    TRACK_WEEKLY: select distinct(master_track_id) from `$SST_SOURCE_DATASET.$TABLE_NAME_CHANGESET_TRACK_WEEKLY` ch where ch._partitiontime >= timestamp('${START_DATE}') and ch._partitiontime <= timestamp('${END_DATE}')
+    REGION:
+  #query to remove processed dates, not in use though
+  data-availability:
+      REMOVE-PROCESSED-DATES: delete from $SST_SOURCE_DATASET.$TABLE_PERIOD_STACK where status = 'scheduled'
+
+
+
+#dataset name
+datasetName:
+  $SST_SOURCE_DATASET: consumption_speedlayer_staging
+  #$SST_SOURCE_DATASET: test_sst_speedlayer_agg
+  $SST_AGG_DATASET: consumption_speedlayer_aggregation_v2
+  #$SST_AGG_DATASET: test_sst_speedlayer_agg
+
+
+#table name
+tableName:
+  #source metadata tables
+  $TABLE_NAME_REGION: sst_country_region_distinct
+  $TABLE_NAME_DAY: day
+
+  $TABLE_NAME_TRANSACTIONS: transactions_current
+  $TABLE_NAME_PRODUCT: product_${PRODUCT_LOAD_DATE}
+  $TABLE_NAME_BLACKLIST_ARTIST: blacklist_artist
+  $TABLE_NAME_PROJECT_GENRE: project_genre
+  $TABLE_NAME_TRACK_GENRE: track_genre
+
+  $TABLE_PERIOD_STACK: period_process_stack
+
+  #changeset source tables
+  $TABLE_NAME_CHANGESET_ARTIST_DAILY: changeset_artist_daily
+
+  $TABLE_NAME_CHANGESET_PROJECT_DAILY: changeset_project_daily
+  $TABLE_NAME_CHANGESET_TRACK_DAILY: changeset_track_daily
+  $TABLE_NAME_CHANGESET_ARTIST_WEEKLY: changeset_artist_weekly
+
+  $TABLE_NAME_CHANGESET_PROJECT_WEEKLY: changeset_project_weekly
+  $TABLE_NAME_CHANGESET_TRACK_WEEKLY: changeset_track_weekly
+
+  #Artists detail agg table names
+  $TABLE_NAME_ARTIST_AGG_STAGING: artist
+  $TABLE_NAME_ARTIST_BT:
+
+  #isrcs detail agg table names
+  $TABLE_NAME_ISRC_AGG_STAGING: isrc
+  $TABLE_NAME_ISRC_BT:
+
+  #project detail agg table names
+  $TABLE_NAME_PROJ_AGG_STAGING: project
+  $TABLE_NAME_PROJ_BT:
+
+  #album detail agg table names
+  $TABLE_NAME_ALBUM_AGG_STAGING: album
+  $TABLE_NAME_ALBUM_BT:
+
+  #track detail agg table names
+  $TABLE_NAME_TRACK_AGG_STAGING: track
+  $TABLE_NAME_TRACK_BT:
+
+  #Top Artists  agg table names
+
+  $TABLE_NAME_TOP_ARTIST_AGG_STAGING: top_artist
+  $TABLE_NAME_TOP_ARTIST_BT:
+
+  $TABLE_NAME_TOP_PROJECT_AGG_STAGING: top_project
+  $TABLE_NAME_TOP_PROJECT_BT:
+
+  $TABLE_NAME_TOP_TRACK_AGG_STAGING: top_track
+  $TABLE_NAME_TOP_TRACK_BT:
+
+#table alias
+tableAlias:
+  $ALIAS_TRANSACTION: t
+  $ALIAS_PARENT_SHARD: pst
+  $ALIAS_DAY: d
+  $ALIAS_PRODUCT: p
+  $ALIAS_REGION: r
+  $ALIAS_BLACKLIST_ARTIST: bl
+  $ALIAS_PROJECT_GENRE: pg
+  $ALIAS_TRACK_GENRE: tg
+
+
+

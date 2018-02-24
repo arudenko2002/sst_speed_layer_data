@@ -1,0 +1,438 @@
+{
+  "project": "",
+  "dataset":"$SST_AGG_DATASET",
+  "stagingTable":"$TABLE_NAME_PROJ_AGG_STAGING",
+  "destinationTable":"$TABLE_NAME_PROJ_BT",
+  "dimension": [
+    {
+      "shardcode": 15000101,
+      "combination": {
+        "period": "DAY",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 14000101,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 15000102,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000101,
+        "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 15000103,
+      "combination": {
+        "period": "RTD",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000102,
+        "period": "MONTH"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 15000107,
+      "combination": {
+        "period": "DAY",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+
+    },
+    {
+      "shardcode": 14000107,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+
+    },
+    {
+      "shardcode": 15000108,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+      "shardcode": 15000107,
+      "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000109,
+      "combination": {
+        "period": "RTD",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000108,
+        "period": "MONTH"
+      },
+
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000110,
+      "combination": {
+        "period": "DAY",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+
+    },
+    {
+      "shardcode": 14000110,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+
+    },
+    {
+      "shardcode": 15000111,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000110,
+        "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+    },
+    {
+      "shardcode": 15000112,
+      "combination": {
+        "period": "RTD",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000111,
+        "period": "MONTH"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+    },
+    {
+      "shardcode": 15000116,
+      "combination": {
+        "period": "DAY",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 14000116,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000117,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000116,
+        "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000118,
+      "combination": {
+        "period": "RTD",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000117,
+        "period": "MONTH"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000119,
+      "combination": {
+        "period": "DAY",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 14000119,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 15000120,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000119,
+        "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 15000121,
+      "combination": {
+        "period": "RTD",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000120,
+        "period": "MONTH"
+      },
+      "dataLoadingType":["DEFAULT"]
+    },
+    {
+      "shardcode": 15000125,
+      "combination": {
+        "period": "DAY",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 14000125,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000201,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000125,
+        "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000202,
+      "combination": {
+        "period": "RTD",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000201,
+        "period": "MONTH"
+      },
+      "dataLoadingType":["DEFAULT", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000203,
+      "combination": {
+        "period": "DAY",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+    },
+    {
+      "shardcode": 14000203,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+    },
+    {
+      "shardcode": 15000204,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000203,
+        "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+    },
+    {
+      "shardcode": 15000205,
+      "combination": {
+        "period": "RTD",
+        "territory": "ALL",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000204,
+        "period": "MONTH"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER"]
+    },
+    {
+      "shardcode": 15000209,
+      "combination": {
+        "period": "DAY",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 14000209,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000210,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000209,
+        "period": "DAY"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    },
+    {
+      "shardcode": 15000211,
+      "combination": {
+        "period": "RTD",
+        "territory": "COUNTRY",
+        "territorysubdivision": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000210,
+        "period": "MONTH"
+      },
+      "dataLoadingType":["DEFAULT", "BY_PARTNER", "BY_PARTNER_SPECIFIC_PARTNER", "BY_COUNTRY_ALL_REGION", "BY_COUNTRY_SPECIFIC_COUNTRY"]
+    }
+
+
+
+
+  ]
+
+
+
+
+
+}

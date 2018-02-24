@@ -1,0 +1,24 @@
+{
+  "columnFamily" : [
+    "units",
+    "euro",
+    "album_adjusted_units",
+    "audio_stream_units",
+    "video_stream_units",
+    "audio_stream_album_adjusted_units",
+    "video_stream_album_adjusted_units",
+    "audio_stream_euro",
+    "video_stream_euro",
+    "physical_album_units",
+    "digital_album_units",
+    "digital_track_units",
+    "digital_track_album_adjusted_units",
+    "physical_album_euro",
+    "digital_album_euro",
+    "digital_track_euro",
+    "digital_album_album_adjusted_units",
+    "physical_album_album_adjusted_units"
+
+
+  ]
+}

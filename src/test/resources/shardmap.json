@@ -1,0 +1,23 @@
+{
+  "startrow" : 4,
+  "shardcode": 1,
+  "period" : {
+    "WEEK" : 5,
+    "MONTH" : 6,
+    "QUARTER" : 7,
+    "YEAR" : 8
+  },
+  "territory" : {
+    "REGION" : 9,
+    "COUNTRY" : 10
+  },
+  "partner": 11,
+  "label" : {
+    "SAP" : 12,
+    "FAMILY" : 14
+  },
+  "projectGenre" : 15,
+  "catalogue" : 16,
+  "parentshardcode" : 2
+
+}

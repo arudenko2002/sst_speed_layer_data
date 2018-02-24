@@ -1,0 +1,63 @@
+{
+  "keys": [{"name":"master_artist_id", "avro-field":true, "reverse":false},
+    {"name":"country_subdivision_code", "avro-field":true, "reverse":false},
+    {"name":"period_marker", "avro-field":true, "reverse":false},
+    {"name":"period", "avro-field":true, "reverse":false},
+    {"name":"project_id", "avro-field":true, "reverse":false},
+    {"name":"release_id", "avro-field":true, "reverse":false},
+    {"name":"product_id", "avro-field":true, "reverse":false}
+
+  ],
+  "columns": [
+    {
+      "avro-field-name": "audio_stream_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "as"
+
+    },
+    {
+      "avro-field-name": "video_stream_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "vs"
+
+    },
+
+    {
+      "avro-field-name": "digital_track_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    },
+    {
+      "avro-field-name": "audio_stream_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "as"
+
+    },
+    {
+      "avro-field-name": "video_stream_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "vs"
+
+    },
+
+    {
+      "avro-field-name": "digital_track_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    }
+  ]
+}

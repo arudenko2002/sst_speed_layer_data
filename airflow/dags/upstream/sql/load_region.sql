@@ -1,0 +1,1 @@
+select * from `{{ var.value.metadata_src }}.region`

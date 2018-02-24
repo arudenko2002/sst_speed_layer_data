@@ -1,0 +1,1738 @@
+{
+  "project": "",
+  "dataset":"$SST_AGG_DATASET",
+  "stagingTable":"$TABLE_NAME_TOP_PROJECT_AGG_STAGING",
+  "crossModuleSourceStagingTable":"$TABLE_NAME_PROJ_AGG_STAGING",
+  "destinationTable":"$TABLE_NAME_TOP_PROJECT_BT",
+  "dimension": [ {
+    "shardcode" : 15000101,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000102,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000103,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000102,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000104,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000103,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000105,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000106,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000107,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000106,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000108,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000107,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000109,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000110,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000111,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000110,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000112,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000111,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000113,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000114,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000115,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000114,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000116,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000115,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000117,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000118,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000119,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000118,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000120,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000119,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000121,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000122,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000123,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000122,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000124,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "ALL",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000123,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000125,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000201,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000202,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000201,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000203,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000202,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000204,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000205,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000206,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000205,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000207,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000206,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000208,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000209,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000210,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000209,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000211,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000210,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000212,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000213,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000214,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000213,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000215,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000214,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000216,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000217,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000218,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000217,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000219,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000218,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000220,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000221,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000222,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000221,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000223,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "SAP",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000222,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000323,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000324,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000325,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000324,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000401,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "ALL",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000325,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000402,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000403,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000404,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000403,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000405,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "REGION",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000404,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000406,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000407,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000408,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000407,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000409,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "COUNTRY",
+      "partner" : "ALL",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000408,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000410,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000411,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000412,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000411,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000413,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "ALL",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000412,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000414,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000415,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000416,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000415,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000417,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "REGION",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000416,
+      "period" : "QUARTER"
+    }
+  }, {
+    "shardcode" : 15000418,
+    "combination" : {
+      "period" : "WEEK",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000419,
+    "combination" : {
+      "period" : "MONTH",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    }
+  }, {
+    "shardcode" : 15000420,
+    "combination" : {
+      "period" : "QUARTER",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000419,
+      "period" : "MONTH"
+    }
+  }, {
+    "shardcode" : 15000421,
+    "combination" : {
+      "period" : "YEAR",
+      "territory" : "COUNTRY",
+      "partner" : "Y",
+      "label" : "FAMILY",
+      "projectGenre" : "ALL",
+      "projectCatalog" : "ALL"
+    },
+    "parentShardSource" : {
+      "shardcode" : 15000420,
+      "period" : "QUARTER"
+    }
+  },
+    {
+      "shardcode" : 15000719,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000720,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000721,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000720,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000722,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000721,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000723,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000724,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000725,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000724,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000801,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000725,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000802,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000803,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000804,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000803,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000805,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000804,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000806,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000807,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000808,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000807,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000809,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000808,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000810,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000811,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000812,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000811,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000813,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000812,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000814,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000815,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000816,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000815,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000817,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000816,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000822,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000823,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000824,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000823,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000825,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000824,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000901,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000902,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000903,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000902,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000904,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000903,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000905,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000906,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000907,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000906,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000908,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000907,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000909,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000910,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000911,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000910,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000912,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000911,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000913,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000914,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000915,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000914,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000916,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000915,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15000917,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000918,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15000919,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000918,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15000920,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15000919,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15001004,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    },
+    {
+      "shardcode" : 15001005,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001006,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001005,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15001007,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001006,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15001008,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001009,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001010,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001009,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15001011,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001010,
+        "period" : "QUARTER"
+      }
+    },  {
+      "shardcode" : 15001024,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001025,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001101,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001025,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15001102,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001101,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15001103,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001104,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001105,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001104,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15001106,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001105,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15001107,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001108,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001109,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001108,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15001110,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001109,
+        "period" : "QUARTER"
+      }
+    }, {
+      "shardcode" : 15001111,
+      "combination" : {
+        "period" : "WEEK",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001112,
+      "combination" : {
+        "period" : "MONTH",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      }
+    }, {
+      "shardcode" : 15001113,
+      "combination" : {
+        "period" : "QUARTER",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001112,
+        "period" : "MONTH"
+      }
+    }, {
+      "shardcode" : 15001114,
+      "combination" : {
+        "period" : "YEAR",
+        "territory" : "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY",
+        "projectGenre" : "ALL",
+        "projectCatalog" : "Y"
+      },
+      "parentShardSource" : {
+        "shardcode" : 15001113,
+        "period" : "QUARTER"
+      }
+    }]
+}

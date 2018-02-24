@@ -1,0 +1,8 @@
+{
+  "columnFamily" : [
+    "units",
+    "euro",
+    "track_adjusted_units"
+
+  ]
+}

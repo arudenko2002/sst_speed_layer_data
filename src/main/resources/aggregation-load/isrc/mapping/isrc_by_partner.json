@@ -1,0 +1,81 @@
+{
+  "keys": [
+    { "name": "master_track_id" },
+    { "name": "territory_marker" },
+    { "name": "territory" },
+    { "name": "ALL" , "field":false},
+    { "name": "label_marker" },
+    { "name": "label" },
+    { "name": "period_marker" },
+    { "name": "period" },
+    { "name": "isrc" }
+  ],
+  "columns": [
+
+    {
+      "field-name": "audio_stream_units",
+      "column-family": "audio_stream_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    },
+    {
+      "field-name": "video_stream_units",
+      "column-family": "video_stream_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    },
+    {
+      "field-name": "digital_track_units",
+      "column-family": "digital_track_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+    },
+    {
+      "field-name": "audio_stream_euro",
+      "column-family": "audio_stream_euro",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    },
+    {
+      "field-name": "video_stream_euro",
+      "column-family": "video_stream_euro",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    },
+    {
+      "field-name": "digital_track_euro",
+      "column-family": "digital_track_euro",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    },
+    {
+      "field-name": "audio_stream_track_adjusted_units",
+      "column-family": "audio_stream_track_adjusted_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    },
+    {
+      "field-name": "video_stream_track_adjusted_units",
+      "column-family": "video_stream_track_adjusted_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    },
+    {
+      "field-name": "digital_track_track_adjusted_units",
+      "column-family": "digital_track_track_adjusted_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "partner"
+
+    }
+
+    ]
+
+}
+

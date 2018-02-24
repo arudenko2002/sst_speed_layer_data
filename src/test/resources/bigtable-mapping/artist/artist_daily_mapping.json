@@ -1,0 +1,66 @@
+
+{
+  "keys": [{"name":"master_artist_id", "avro-field":true, "reverse":false},
+    {"name":"ALL", "avro-field":false, "reverse":false},
+    {"name":"D", "avro-field":false, "reverse":false},
+    {"name":"day", "avro-field":true, "reverse":false}
+  ],
+  "columns": [
+    {
+      "avro-field-name": "stream_units",
+      "column-family": "stream_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    },
+    {
+      "avro-field-name": "physical_album_units",
+      "column-family": "physical_album_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    },
+    {
+      "avro-field-name": "digital_album_units",
+      "column-family": "digital_album_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    },
+    {
+      "avro-field-name": "digital_track_units",
+      "column-family": "digital_track_units",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    },
+    {
+      "avro-field-name": "stream_euro",
+      "column-family": "stream_euro",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    },
+    {
+      "avro-field-name": "physical_album_euro",
+      "column-family": "physical_album_euro",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    },
+    {
+      "avro-field-name": "digital_album_euro",
+      "column-family": "digital_album_euro",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    },
+    {
+      "avro-field-name": "digital_track_euro",
+      "column-family": "digital_track_euro",
+      "column-qualifier-prefix": "pr",
+      "column-qualifier": "sub_account_code"
+
+    }
+  ]
+}

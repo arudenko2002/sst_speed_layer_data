@@ -1,0 +1,149 @@
+{
+  "tables" : {
+    "period": {
+            "select" : {
+                "WEEK" : "global_week",
+                "DAY": "day_id",
+                "MONTH": "month",
+                "QUARTER": "quarter",
+                "YEAR": "year",
+                 "RTD": "'ALL'"
+            },
+            "jointype": "INNERJOIN",
+            "project": "",
+            "dataset": "$SST_SOURCE_DATASET",
+            "name": "$TABLE_NAME_DAY",
+            "alias": "$ALIAS_DAY",
+            "maintablealias": "$ALIAS_TRANSACTION",
+            "on": {
+              "column": "day",
+              "primaryColumn": "partner_report_date"
+            }
+
+    },
+    "territory": {
+      "select" : {
+        "REGION" : "region_id",
+        "COUNTRY": "sst_country_code",
+        "ALL": "'ALL'"
+      },
+      "jointype": "INNERJOIN",
+      "project": "",
+      "dataset": "$SST_SOURCE_DATASET",
+      "name": "$TABLE_NAME_REGION",
+      "alias": "$ALIAS_REGION",
+      "maintablealias": "$ALIAS_TRANSACTION",
+      "on": {
+        "column": "sst_country_code",
+        "primaryColumn": "sst_country_code"
+      },
+      "where" : {
+        "condition" : {
+          "REGION" : [" $ALIAS_REGION.region_id <> 38 "]
+        }
+
+      }
+
+    },
+    "territorysubdivision": {
+      "select" : {
+        "Y" : "if(sst_country_code='US', dma_number, country_subdivision_code)",
+        "ALL": "'ALL'"
+      },
+      "where" : {
+        "condition" : {
+          "Y" : ["( (sst_country_code = 'US' and dma_number <> '' and dma_number <> '0' and dma_number <> '1' ) or ($ALIAS_TRANSACTION.sst_country_code <> 'US' and $ALIAS_TRANSACTION.country_subdivision_code <> '') )"]
+        }
+
+      }
+    },
+    "projectGenre": {
+      "select" : {
+        "Y" : "$ALIAS_PROJECT_GENRE.sub_genre_code",
+        "ALL": "'ALL'"
+      },
+      "jointype": "INNERJOIN",
+      "project": "",
+      "dataset": "$SST_SOURCE_DATASET",
+      "name": "$TABLE_NAME_PROJECT_GENRE",
+      "alias": "$ALIAS_PROJECT_GENRE",
+      "maintablealias": "$ALIAS_PRODUCT",
+      "on": {
+        "column": "project_id",
+        "primaryColumn": "project_id"
+      }
+    },
+    "trackGenre": {
+      "select" : {
+        "Y" : "$ALIAS_TRACK_GENRE.sub_genre_code",
+        "ALL": "'ALL'"
+      },
+      "jointype": "INNERJOIN",
+      "project": "",
+      "dataset": "$SST_SOURCE_DATASET",
+      "name": "$TABLE_NAME_TRACK_GENRE",
+      "alias": "$ALIAS_TRACK_GENRE",
+      "maintablealias": "$ALIAS_PRODUCT",
+      "on": {
+        "column": "master_track_id",
+        "primaryColumn": "master_track_id"
+      }
+    },
+    "partner": {
+      "select" : {
+        "Y" : "master_account_code",
+        "ALL": "'ALL'"
+      }
+    },
+    "projectcatalog": {
+      "select" : {
+        "Y" : "IF(DATE_DIFF(CURRENT_DATE(), earliest_project_release_date, YEAR) >=2, 'Y', 'N')",
+        "ALL": "'ALL'"
+      },
+      "where" : {
+        "condition" : {
+          "Y" : ["earliest_project_release_date is not null", "EXTRACT(YEAR FROM earliest_project_release_date) > 1901"]
+        }
+      }
+    },
+    "trackcatalog": {
+      "select" : {
+        "Y" : "IF(DATE_DIFF(CURRENT_DATE(), earliest_master_track_release_date, YEAR) >=2, 'Y', 'N')",
+        "ALL": "'ALL'"
+      },
+      "where" : {
+        "condition" : {
+          "Y" : ["earliest_master_track_release_date is not null" ,  "EXTRACT(YEAR FROM earliest_master_track_release_date) > 1901"]
+        }
+      }
+    },
+    "usagetype": {
+      "select" : {
+        "Y" : "free_paid",
+        "ALL": "'ALL'"
+      }
+    },
+    "label": {
+      "select" : {
+        "SAP" : "$ALIAS_TRANSACTION.sap_segment_code",
+        "FAMILY" : "label_family_id",
+        "ALL": "'ALL'"
+      },
+      "where" : {
+        "condition" : {
+          "SAP" : ["$ALIAS_TRANSACTION.sap_segment_code <> ''"],
+          "FAMILY" : ["cast(label_family_id as string) <> ''"]
+        }
+      }
+
+    },
+    "product": {
+      "where" : {
+        "condition" : {
+          "mandatory" : []
+        }
+      }
+
+    }
+  }
+}

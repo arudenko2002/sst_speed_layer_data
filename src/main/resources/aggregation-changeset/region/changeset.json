@@ -1,0 +1,71 @@
+{
+
+    "sqlExpField" : {
+        "Source-Staging":  "cast(territory as string)  $INCLAUSE ($PARAMS)",
+        "Source-Metadata":  "cast($ALIAS_REGION.region_id as string)  $INCLAUSE ($PARAMS)"
+    },
+
+    "filterArr" : {
+        "remove": [
+            {
+                "combination": {
+                    "territory": "REGION"
+                },
+                "dataLoadingTypes": [
+                    "DEFAULT"
+                ]
+            }
+        ],
+        "build": [
+            {
+                "sqlExpField" : {
+                    "Source-Staging":  "cast(territory as string)  $INCLAUSE ($PARAMS)",
+                    "Source-Metadata":  "cast($ALIAS_REGION.region_id as string)  $INCLAUSE ($PARAMS)"
+                },
+                "combination": {
+                    "period" : "DAY",
+                    "territory": "REGION"
+                }
+            },
+            {
+                "sqlExpField" : {
+                    "Source-Staging":  "cast(territory as string)  $INCLAUSE ($PARAMS)",
+                    "Source-Metadata":  "cast($ALIAS_REGION.region_id as string)  $INCLAUSE ($PARAMS)"
+                },
+                "combination": {
+                    "period" : "MONTH",
+                    "territory": "REGION"
+                }
+            },
+            {
+                "sqlExpField" : {
+                    "Source-Staging":  "cast(territory as string)  $INCLAUSE ($PARAMS)",
+                    "Source-Metadata":  "cast($ALIAS_REGION.region_id as string)  $INCLAUSE ($PARAMS)"
+                },
+                "combination": {
+                    "period" : "RTD",
+                    "territory": "REGION"
+                }
+            }
+        ],
+        "load": [
+            {
+                "combination": {
+                    "territory": "REGION"
+                }
+            },
+            {
+                "sqlExpField": {
+                    "Source-Staging":  "cast(territory as string) IN (SELECT sst_country_code from $SST_SOURCE_DATASET.$TABLE_NAME_REGION where cast(region_id as string) $INCLAUSE ($PARAMS))"
+                },
+                "combination": {
+                    "territory": "COUNTRY",
+                    "territorysubdivision": "ALL"
+                },
+                "dataLoadingTypes": [
+                    "BYCOUNTRY"
+                ]
+            }
+        ]
+    }
+}

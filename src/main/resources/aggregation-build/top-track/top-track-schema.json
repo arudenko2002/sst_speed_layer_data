@@ -1,0 +1,178 @@
+[
+
+    {
+      "name": "master_track_id",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "catalog",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "genres",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+
+    {
+      "name": "period_marker",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "period",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+  {
+    "name": "lt_period",
+    "type": "string",
+    "mode": "nullable",
+    "description": ""
+  },
+    {
+      "name": "territory_marker",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "territory",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "partner",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "label_marker",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "rank",
+      "type": "integer",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+  {
+    "name": "lptd_units",
+    "type": "float",
+    "mode": "nullable",
+    "description": ""
+  },
+    {
+      "name": "audio_stream_units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "video_stream_units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "digital_track_units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "track_adjusted_units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+  {
+    "name": "lptd_track_adjusted_units",
+    "type": "float",
+    "mode": "nullable",
+    "description": ""
+  },
+    {
+      "name": "audio_stream_track_adjusted_units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "video_stream_track_adjusted_units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "euro",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+  {
+    "name": "lptd_euro",
+    "type": "float",
+    "mode": "nullable",
+    "description": ""
+  },
+    {
+      "name": "audio_stream_euro",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "video_stream_euro",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "digital_track_euro",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "digital_track_track_adjusted_units",
+      "type": "float",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "load_datetime",
+      "type": "timestamp",
+      "mode": "nullable",
+      "description": ""
+    },
+    {
+      "name": "shard_number",
+      "type": "integer",
+      "mode": "nullable",
+      "description": ""
+    }
+  ]

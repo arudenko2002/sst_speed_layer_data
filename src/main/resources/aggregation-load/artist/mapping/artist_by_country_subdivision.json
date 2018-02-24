@@ -1,0 +1,137 @@
+{
+  "keys": [
+    { "name": "master_artist_id" },
+    { "name": "territory_marker"},
+    { "name": "territory"},
+    { "name": "partner"  },
+    { "name": "label_marker" },
+    { "name": "label" },
+    { "name": "period_marker" },
+    { "name": "period" }
+  ],
+  "columns": [
+    {
+      "field-name": "audio_stream_units",
+      "column-family": "audio_stream_units",
+      "column-qualifier-static": false,
+      "column-qualifier-prefix": "csd",
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "video_stream_units",
+      "column-family": "video_stream_units",
+      "column-qualifier-static": false,
+      "column-qualifier-prefix": "csd",
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "physical_album_units",
+      "column-family": "physical_album_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "digital_album_units",
+      "column-family": "digital_album_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "digital_track_units",
+      "column-family": "digital_track_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "audio_stream_album_adjusted_units",
+      "column-family": "audio_stream_album_adjusted_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "video_stream_album_adjusted_units",
+      "column-family": "video_stream_album_adjusted_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "digital_track_album_adjusted_units",
+      "column-family": "digital_track_album_adjusted_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "audio_stream_euro",
+      "column-family": "audio_stream_euro",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "video_stream_euro",
+      "column-family": "video_stream_euro",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "physical_album_euro",
+      "column-family": "physical_album_euro",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "digital_album_euro",
+      "column-family": "digital_album_euro",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "digital_track_euro",
+      "column-family": "digital_track_euro",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "digital_album_album_adjusted_units",
+      "column-family": "digital_album_album_adjusted_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    },
+    {
+      "field-name": "physical_album_album_adjusted_units",
+      "column-family": "physical_album_album_adjusted_units",
+      "column-qualifier-prefix": "csd",
+      "column-qualifier-static": false,
+      "column-qualifier": "territory_subdivision"
+
+    }
+
+    ]
+
+}
+

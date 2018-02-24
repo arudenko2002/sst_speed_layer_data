@@ -1,0 +1,48 @@
+select t.transaction_date as transaction_date,
+t.product_id as product_id,
+t.sales_country_code as sales_country_code,
+t.dma_number as dma_number,
+t.country_subdivision_code as country_subdivision_code,
+'26830'  as master_account_code,
+case when lower(t.usage_group) like '%free%' then 'Free' else 'Paid' end as free_paid,
+ifnull(lp.sap_segment, '') as sap_segment_name,
+ifnull(lp.sap_segment_code, '') as sap_segment_code,
+sum(ifnull(t.units, cast(0 as float64))) as units,
+sum(ifnull(t.album_adjusted_units, cast(0 as float64))) as album_adjusted_units,
+sum(ifnull(t.track_adjusted_units, cast(0 as float64))) as track_adjusted_units,
+cast(0 as float64) as physical_album_units,
+cast(0 as float64) as digital_album_units,
+cast(0 as float64) as digital_track_units,
+cast(0 as float64) as digital_track_album_adjusted_units,
+sum(ifnull(t.units, cast(0 as float64))) as stream_units,
+sum(ifnull(t.album_adjusted_units, cast(0 as float64))) as stream_album_adjusted_units,
+sum(ifnull(t.track_adjusted_units, cast(0 as float64))) as stream_track_adjusted_units,
+sum(ifnull(t.units, cast(0 as float64))) as audio_stream_units,
+sum(ifnull(t.album_adjusted_units, cast(0 as float64))) as audio_stream_album_adjusted_units,
+sum(ifnull(t.track_adjusted_units, cast(0 as float64))) as audio_stream_track_adjusted_units,
+cast(0 as float64) as video_stream_units,
+cast(0 as float64) as video_stream_album_adjusted_units,
+cast(0 as float64) as video_stream_track_adjusted_units,
+cast(0 as float64) as airplay_units,
+sum(ifnull(t.units * 0.00689, cast(0 as float64))) as euro,
+cast(0 as float64) as physical_album_euro,
+cast(0 as float64) as digital_album_euro,
+cast(0 as float64) as digital_track_euro,
+sum(ifnull(t.units * 0.00689, cast(0 as float64))) as stream_euro,
+sum(ifnull(t.units * 0.00689, cast(0 as float64))) as audio_stream_euro,
+cast(0 as float64) as video_stream_euro,
+cast(0 as float64) as airplay_euro
+from (select * from `umg-marketing.consumption.transactions_deezer`
+      where _partitiontime = timestamp(@datePartition)) t
+left outer join  `umg-marketing.metadata.local_product` lp on t.product_id = lp.product_id
+                and t.sales_country_code = lp.sales_country_code
+                and lp.sales_country_code in ('US','GB','DK','CA','SE','JP','NO','BE','FR','NL','DE','IE')
+                and lp.sap_segment_code <> '-'
+group by transaction_date,
+product_id,
+sales_country_code,
+dma_number,
+country_subdivision_code,
+sap_segment_name,
+sap_segment_code,
+free_paid

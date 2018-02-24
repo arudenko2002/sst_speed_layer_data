@@ -1,0 +1,115 @@
+{
+  "keys": [
+    { "name": "master_artist_id" },
+    { "name": "territory_marker" },
+    { "name": "territory" },
+    { "name": "partner" },
+    { "name": "label_marker" },
+    { "name": "label" },
+    { "name": "period_marker" },
+    { "name": "period" },
+    { "name": "project_id" },
+    { "name": "master_track_id" }
+  ],
+  "columns": [
+    {
+      "field-name": "digital_track_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    },
+    {
+      "field-name": "audio_stream_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "as"
+
+    },
+    {
+      "field-name": "video_stream_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "vs"
+
+    },
+    {
+      "field-name": "audio_stream_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "as"
+
+    },
+    {
+      "field-name": "video_stream_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "vs"
+
+    },
+    {
+      "field-name": "digital_track_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    },
+    {
+      "field-name": "audio_stream_track_adjusted_units",
+      "column-family": "track_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "as"
+
+    },
+    {
+      "field-name": "video_stream_track_adjusted_units",
+      "column-family": "track_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "vs"
+
+    },
+    {
+      "field-name": "digital_track_track_adjusted_units",
+      "column-family": "track_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    },
+    {
+      "field-name": "audio_stream_album_adjusted_units",
+      "column-family": "album_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "as"
+
+    },
+    {
+      "field-name": "video_stream_album_adjusted_units",
+      "column-family": "album_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "vs"
+
+    },
+    {
+      "field-name": "digital_track_album_adjusted_units",
+      "column-family": "album_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    }
+
+    ]
+
+}
+

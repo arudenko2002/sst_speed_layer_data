@@ -1,0 +1,9 @@
+{
+  "columnFamily" : [
+    "units",
+    "euro",
+    "album_adjusted_units",
+    "artist"
+
+  ]
+}

@@ -1,0 +1,1 @@
+select * from `umg-marketing.metadata.currency`

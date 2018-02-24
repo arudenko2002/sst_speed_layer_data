@@ -1,0 +1,905 @@
+{
+  "project": "",
+  "dataset":"$SST_AGG_DATASET",
+  "stagingTable":"$TABLE_NAME_TOP_ARTIST_AGG_STAGING",
+  "crossModuleSourceStagingTable":"$TABLE_NAME_ARTIST_AGG_STAGING",
+  "destinationTable":"$TABLE_NAME_TOP_ARTIST_BT",
+  "dimension": [
+    {
+      "shardcode": 15000101,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000101,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000101,
+        "lptdPeriod": "DAY"
+      }
+
+    },
+    {
+      "shardcode": 15000102,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000102,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000101,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000103,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000102,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000104,
+      "combination": {
+        "period": "YEAR",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000103,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000105,
+      "combination": {
+        "period": "WEEK",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "ALL"
+      }
+    },
+    {
+      "shardcode": 15000106,
+      "combination": {
+        "period": "MONTH",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "ALL"
+      }
+    },
+    {
+      "shardcode": 15000107,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000106,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000108,
+      "combination": {
+        "period": "YEAR",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+      "shardcode": 15000107,
+      "period": "QUARTER"
+    }
+    },
+    {
+      "shardcode": 15000109,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000107,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000107,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000110,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000108,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000107,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000111,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+
+      "parentShardSource":{
+        "shardcode": 15000110,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000112,
+      "combination": {
+        "period": "YEAR",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000111,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000113,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000110,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000110,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000114,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000111,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000110,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000115,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000114,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000116,
+      "combination": {
+        "period": "YEAR",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000115,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000117,
+      "combination": {
+        "period": "WEEK",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "ALL"
+      }
+    },
+    {
+      "shardcode": 15000118,
+      "combination": {
+        "period": "MONTH",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "ALL"
+      }
+    },
+    {
+      "shardcode": 15000119,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000118,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000120,
+      "combination": {
+        "period": "YEAR",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000119,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000121,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000116,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000116,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000122,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000117,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000116,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000123,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000122,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000124,
+      "combination": {
+        "period": "YEAR",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "ALL"
+      },
+      "parentShardSource":{
+        "shardcode": 15000123,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000125,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000119,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000119,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000201,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000120,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000119,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000202,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000201,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000203,
+      "combination": {
+        "period": "YEAR",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000202,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000204,
+      "combination": {
+        "period": "WEEK",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "SAP"
+      }
+    },
+    {
+      "shardcode": 15000205,
+      "combination": {
+        "period": "MONTH",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "SAP"
+      }
+    },
+    {
+      "shardcode": 15000206,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000205,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000207,
+      "combination": {
+        "period": "YEAR",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000206,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000208,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000125,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000125,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000209,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000201,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000125,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000210,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000209,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000211,
+      "combination": {
+        "period": "YEAR",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000210,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000212,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000203,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000203,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000213,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000204,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000203,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000214,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000213,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000215,
+      "combination": {
+        "period": "YEAR",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000214,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000216,
+      "combination": {
+        "period": "WEEK",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "SAP"
+      }
+    },
+    {
+      "shardcode": 15000217,
+      "combination": {
+        "period": "MONTH",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "SAP"
+      }
+    },
+    {
+      "shardcode": 15000218,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000217,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000219,
+      "combination": {
+        "period": "YEAR",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000218,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000220,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000209,
+        "tpPeriod": "DAY",
+        "lptdShardCode": 15000209,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000221,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "crossModuleParentShardSource":{
+        "tpShardCode": 15000210,
+        "tpPeriod": "MONTH",
+        "lptdShardCode": 15000209,
+        "lptdPeriod": "DAY"
+      }
+    },
+    {
+      "shardcode": 15000222,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000221,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000223,
+      "combination": {
+        "period": "YEAR",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "SAP"
+      },
+      "parentShardSource":{
+        "shardcode": 15000222,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000323,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000324,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000325,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000324,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000401,
+      "combination": {
+        "period": "YEAR",
+        "territory": "ALL",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000325,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000402,
+      "combination": {
+        "period": "WEEK",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000403,
+      "combination": {
+        "period": "MONTH",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000404,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000403,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000405,
+      "combination": {
+        "period": "YEAR",
+        "territory": "REGION",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000404,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000406,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000407,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000408,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000407,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000409,
+      "combination": {
+        "period": "YEAR",
+        "territory": "COUNTRY",
+        "partner" : "ALL",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000408,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000410,
+      "combination": {
+        "period": "WEEK",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000411,
+      "combination": {
+        "period": "MONTH",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000412,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000411,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000413,
+      "combination": {
+        "period": "YEAR",
+        "territory": "ALL",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000412,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000414,
+      "combination": {
+        "period": "WEEK",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000415,
+      "combination": {
+        "period": "MONTH",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000416,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000415,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000417,
+      "combination": {
+        "period": "YEAR",
+        "territory": "REGION",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000416,
+        "period": "QUARTER"
+      }
+    },
+    {
+      "shardcode": 15000418,
+      "combination": {
+        "period": "WEEK",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000419,
+      "combination": {
+        "period": "MONTH",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      }
+    },
+    {
+      "shardcode": 15000420,
+      "combination": {
+        "period": "QUARTER",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000419,
+        "period": "MONTH"
+      }
+    },
+    {
+      "shardcode": 15000421,
+      "combination": {
+        "period": "YEAR",
+        "territory": "COUNTRY",
+        "partner" : "Y",
+        "label" : "FAMILY"
+      },
+      "parentShardSource":{
+        "shardcode": 15000420,
+        "period": "QUARTER"
+      }
+    }
+
+  ]
+
+
+
+
+
+}

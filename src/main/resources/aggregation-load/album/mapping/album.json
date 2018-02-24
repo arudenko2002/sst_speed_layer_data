@@ -1,0 +1,122 @@
+{
+  "keys": [
+    { "name": "project_id" },
+    { "name": "territory_marker" },
+    { "name": "territory" },
+    { "name": "partner" },
+    { "name": "label_marker" },
+    { "name": "label" },
+    { "name": "period_marker" },
+    { "name": "period" },
+    { "name": "upc" }
+  ],
+  "columns": [
+    {
+      "field-name": "digital_track_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    },
+    {
+      "field-name": "physical_album_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "pa"
+
+    },
+    {
+      "field-name": "digital_album_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "da"
+
+    },
+    {
+      "field-name": "stream_units",
+      "column-family": "units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "s"
+
+    },
+    {
+      "field-name": "physical_album_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "pa"
+
+    },
+    {
+      "field-name": "digital_album_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "da"
+
+    },
+    {
+      "field-name": "digital_track_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    },
+    {
+      "field-name": "stream_euro",
+      "column-family": "euro",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "s"
+
+    },
+    {
+      "field-name": "physical_album_album_adjusted_units",
+      "column-family": "album_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "pa"
+
+    },
+    {
+      "field-name": "digital_album_album_adjusted_units",
+      "column-family": "album_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "da"
+
+    },
+    {
+      "field-name": "digital_track_album_adjusted_units",
+      "column-family": "album_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "dt"
+
+    },
+    {
+      "field-name": "stream_album_adjusted_units",
+      "column-family": "album_adjusted_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "s"
+
+    },
+    {
+      "field-name": "digital_album_preorder_units",
+      "column-family": "preorder_units",
+      "column-qualifier-prefix": "mt",
+      "column-qualifier-static": true,
+      "column-qualifier": "da"
+
+    }
+
+    ]
+
+}
+

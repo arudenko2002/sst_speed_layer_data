@@ -1,0 +1,66 @@
+group 'com.umusic.gcp.sst.speedlayer.data'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
+
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+mainClassName="com.umusic.gcp.sst.speedlayer.data.main.SSTSpeedLayerStarter"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile 'org.slf4j:slf4j-api:1.7.22'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.13'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.0.13'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'commons-io:commons-io:2.5'
+    compile 'org.apache.avro:avro:1.7.7'
+    compile 'io.netty:netty-tcnative-boringssl-static:1.1.33.Fork19'
+    compile 'com.google.cloud.bigtable:bigtable-hbase-dataflow:0.9.4'
+    compile 'com.google.cloud.dataflow:google-cloud-dataflow-java-sdk-all:1.9.1'
+    compile group: 'com.google.cloud', name: 'google-cloud-bigquery', version: '0.9.4-beta'
+   // compile group: 'com.google.cloud.bigtable', name: 'bigtable-hbase-1.x', version: '1.0.0-pre2'
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.8.8'
+
+    testCompile 'junit:junit:4.11'
+}
+
+jar {
+
+    baseName 'sst-speed-layer'
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'SST Speed Layer Pipelines',
+                'Implementation-Version': version,
+                'Main-Class': mainClassName
+
+    }
+    baseName = 'sst-speed-layer'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task resources {
+    def resourcesDir = new File("build/resources/main")
+    resourcesDir.mkdirs()
+}
+
+
+run {
+
+    if (project.hasProperty("args")) {
+        args project.args.split("\\s")
+    }
+}
+
+run.mustRunAfter 'resources'
